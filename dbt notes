@@ -1,0 +1,18 @@
+dbt init
+
+dbt --config-dir 
+
+
+# TO install dependencies
+
+dbt deps 
+
+
+# To generate model using dbt command :  (This is only possible if you have codegen package)
+
+dbt run-operation generate_base_model --args '{"source_name": "thelook_ecommerce", "table_name": "orders"}'
+
+
+# To generate model yaml file command :
+
+ dbt run-operation generate_model_yaml --args '{"model_names": ["stg_ecommerce__orders"]}'
