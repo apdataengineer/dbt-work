@@ -1,18 +1,61 @@
-dbt init
+1. dbt init
 
-dbt --config-dir 
+2. dbt --config-dir   -- This is to check the profiles.yml file of your dbt project
 
 
-# TO install dependencies
+3. # TO install dependencies
 
 dbt deps 
 
 
-# To generate model using dbt command :  (This is only possible if you have codegen package)
+4. # To generate model using dbt command :  (This is only possible if you have codegen package)
 
 dbt run-operation generate_base_model --args '{"source_name": "thelook_ecommerce", "table_name": "orders"}'
 
 
-# To generate model yaml file command :
+5. # To generate model yaml file command :
 
  dbt run-operation generate_model_yaml --args '{"model_names": ["stg_ecommerce__orders"]}'
+
+
+6.# running dbt model 
+
+ dbt run -s stg_ecommerece__orders 
+
+7. # full refresh will drop the view and create it as table , if view is present in with same name in bq but in dbt_project.yml the setting is : 
+models:
+  asmit_prj:
+    +materialized: table
+
+ dbt run -s stg_ecommerce__orders --full-refresh
+
+  
+  if we mention persistent docs setting in dbt_project.yml ,  while running the model and creating the table, the descrition will be generated in bq if its mentioned in repecitive yml file 
+
++persist_docs: 
+      relation: true 
+      columns: true
+
+
+
+ 8. The dbt clean command removes all directories specified in the clean-targets list of your dbt_project.yml file, primarily deleting the target/ (compiled SQL) and dbt_packages/ (or dbt_modules/) directories. 
+ It is used to reset a project, remove obsolete artifacts, or ensure a clean environment before reinstalling dependencies.
+
+  dbt clean 
+  dbt deps 
+
+
+9.  testing dbt model 
+
+  dbt test -s  dbt run -s stg_ecommerece__orders 
+
+
+10. dbt run    - This command causes to run all the models present in your project 
+
+
+11. dbt test  - This command causes to test all the models present in your project 
+
+
+12. dbt build - This command causes to run all the models followed by the testing of  dbt models in the project 
+
+
