@@ -56,6 +56,6 @@ models:
 11. dbt test  - This command causes to test all the models present in your project 
 
 
-12. dbt build - This command causes to run all the models followed by the testing of  dbt models in the project 
+12. dbt build - This command causes to run all the models followed by the testing of  dbt models in the project .
 
 
