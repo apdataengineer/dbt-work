@@ -36,4 +36,8 @@ models:
     +persist_docs: 
       relation: true 
       columns: true
+    
+tests:
+  asmit_prj: 
+    +severity: warn
       

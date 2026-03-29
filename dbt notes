@@ -59,3 +59,74 @@ models:
 12. dbt build - This command causes to run all the models followed by the testing of  dbt models in the project .
 
 
+13. error severity can be set at project level. For that dbt_project.yml needs to be updated as below:
+
+tests:
+  asmit_prj: 
+    +severity: warn
+
+But for any particular column of any table/model if you want to set serverity as error, you can set it up in that individual yml file of that model 
+
+We can also set some threshold in severity as below 
+
+    +severity: warn
+      warn_if: ">0"
+      error_if: ">100"
+
+
+14.  dbt_utils and dbt_expectations can be used for data quality checks.  **********
+
+
+15. singular custom tests for any specific model 
+
+
+WITH order_details AS (
+    SELECT
+        order_id,
+        COUNT(*) AS num_of_items_in_order
+
+    FROM {{ ref('stg_ecommerce__order_items') }}
+    GROUP BY 1
+)
+
+SELECT
+    o.*,
+    od.*
+
+FROM {{ ref('stg_ecommerce__orders') }} AS o
+FULL OUTER JOIN order_details AS od USING(order_id)
+WHERE
+    -- All orders should have at least 1 item, and every item should tie to an order
+    o.order_id IS NULL
+    OR od.order_id IS NULL
+    -- Number of items doesn't match
+    OR o.num_items_ordered != od.num_of_items_in_order
+
+
+15. Generic custom tests for all the model 
+
+{% test check_primary_key(model, column_name) %}
+
+WITH validation AS (
+
+    SELECT 
+        {{ column_name}} AS primary_key, 
+        COUNT(1) AS occurrences
+    FROM 
+        {{ model }}
+    GROUP BY 1 
+) 
+
+SELECT 
+    * 
+FROM validation 
+WHERE primary_key IS NOT NULL OR occurrences > 1 
+
+{% endtest %}
+
+
+
+16. source freshness test 
+
+
+17. unit tests 
