@@ -130,3 +130,9 @@ WHERE primary_key IS NOT NULL OR occurrences > 1
 
 
 17. unit tests 
+
+
+18. doc function  can be created to maintain all the column description at one place and then it can be just referenced in respective yml file of model 
+
+
+19. seed file - for smaller .csv files  to directly load into datawarrehouse 
