@@ -15,7 +15,7 @@ models:
         description: ""
 
       - name: status
-        description: "Indicates the status of the order"
+        description: "{{ doc('status') }}"
         tests:
           - not_null
           - accepted_values:
