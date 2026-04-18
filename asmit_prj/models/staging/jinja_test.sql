@@ -1,0 +1,1 @@
+SELECT {{ say_hello('asmit') }} as greeting
