@@ -1,0 +1,13 @@
+asmit_prj:
+  outputs:
+    qa:
+      dataset: dbt_qa
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: US
+      method: oauth
+      priority: interactive
+      project: ap-data-engineer-dev
+      threads: 60
+      type: bigquery
+  target: qa

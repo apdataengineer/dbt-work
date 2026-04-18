@@ -36,6 +36,8 @@ models:
     +persist_docs: 
       relation: true 
       columns: true
+    intermediate:
+      +tags: ['my_tag']
     
 tests:
   asmit_prj: 
