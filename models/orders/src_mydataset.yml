@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: bigquery_mydataset
+    database: ap-data-engineer-dev   # optional for BigQuery
+    schema: mydataset                 # BigQuery dataset
+
+    tables:
+      - name: demo
